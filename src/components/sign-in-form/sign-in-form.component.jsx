@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import FormInput from '../form-input/form-input.component';
 import './sign-in-form.styles.scss';
 import Button from '../button/button.component'
@@ -6,6 +6,7 @@ import { signInWithGooglePopup,
     createUserDocumentFromAuth,
     signInAuthUserWithEmailAndPassword
  } from '../../utils/firebase/firebase.utils'
+ import { UserContext } from '../../context/user.context'
 
 
 const defaultFormFields = {
@@ -19,21 +20,25 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
+    const { setCurrentUser } = useContext(UserContext);
+
     const resetFormFields = () => {
         setFormFields(defaultFormFields)
     }
     
     const signInWithGoogle = async () => {
         const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
+        setCurrentUser(user);
+        await createUserDocumentFromAuth(user);
     }
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         
         try{
-            const response = await signInAuthUserWithEmailAndPassword(email, password);    
-            console.log(response);
+            const { user } = await signInAuthUserWithEmailAndPassword(email, password);    
+            setCurrentUser(user);
+
             resetFormFields();
         }catch(error) {
             switch(error.code) {
@@ -77,11 +82,14 @@ const SignInForm = () => {
                 required/>
                 <div className='buttons-container'>
                     <Button type="submit">Sign In</Button>
-                    <Button type="button" buttonType='google' onClick={signInWithGoogle} type="submit">Google sign in</Button>
+                    <Button type="button" 
+                    buttonType='google' 
+                    onClick={signInWithGoogle}
+                    >Google sign in</Button>
                 </div>
             </form>
         </div>
     )
 };
 
-export default SignInForm
+export default SignInForm;
