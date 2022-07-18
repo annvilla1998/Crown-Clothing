@@ -16,9 +16,9 @@ const Navigation = () => {
                 <CrownLogo className='logo' />
             </Link>
             <div className="nav-links-container">
-                {/* <Link className='nav-link' to='/shop'>
+                <Link className='nav-link' to='/shop'>
                     SHOP
-                </Link> */}
+                </Link>
                 {currentUser ? (
                   <span onClick={signOutUser} className='nav-link'>SIGN OUT</span>
                 ): (
