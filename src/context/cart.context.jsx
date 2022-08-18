@@ -14,7 +14,6 @@ const addCartItem = (cartItems, productToAdd) => {
     }else{
         return [...cartItems, {...productToAdd, quantity: 1}];
     }
-    
 }
 
 const decrementCartItem = (cartItems, productToRemove) => {
