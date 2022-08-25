@@ -24,7 +24,7 @@ const PaymentForm = () => {
     }
     setIsProcessingPayment(true);
     const response = await fetch('/.netlify/functions/create-payment-intent', {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -34,16 +34,16 @@ const PaymentForm = () => {
     });
 
     const clientSecret = response.paymentIntent.client_secret;
-
+    
+    console.log(clientSecret)
     const paymentResult = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: currentUser ? currentUser.displayName : 'Yihua Zhang',
+          name: currentUser ? currentUser.displayName : 'Anabel',
         },
       },
     });
-    console.log(clientSecret)
 
     setIsProcessingPayment(false);
 
