@@ -23,7 +23,6 @@ import {
   QueryDocumentSnapshot
 } from 'firebase/firestore';
 
-import { Category } from '../store/categories/category.types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk',
@@ -70,13 +69,26 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd> (
   console.log('done');
 };
 
+type CategoryItem = {
+  id: number;
+  imageUrl: string;
+  name: string;
+  price: number;
+};
 
-export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
+type CategoryData = {
+  imageUrl: string;
+  items: CategoryItem[];
+  title: string;
+};
+
+
+export const getCategoriesAndDocuments = async (): Promise<CategoryData[]> => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as Category);
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data() as CategoryData);
 };
 
 export type AdditionalInformation = {
