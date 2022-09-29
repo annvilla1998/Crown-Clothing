@@ -8,8 +8,8 @@ export const CART_INITIAL_STATE: CartState = {
 }
 
 export type CartState = {
-    isCartOpen: boolean;
-    cartItems: CartItem[];
+    readonly isCartOpen: boolean;
+    readonly cartItems: CartItem[];
 }
 
 export const cartReducer = (state = CART_INITIAL_STATE, action: AnyAction): CartState => {
