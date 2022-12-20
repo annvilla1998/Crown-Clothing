@@ -9,7 +9,7 @@ import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { Fragment } from 'react';
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
 import { signOutStart } from '../../store/user/user.action';
-import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from './navigation.styles.js';
+import { NavigationContainer, LogoContainer, NavLinksContainer, NavLink } from './navigation.styles';
 
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
