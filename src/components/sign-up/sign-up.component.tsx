@@ -2,7 +2,7 @@ import { useState, FormEvent, ChangeEvent } from 'react';
 import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
-import { SignUpContainer } from './sign-up-form.styles.js';
+import { SignUpContainer } from './sign-up-form.styles';
 import Button from '../button/button.component';
 import { signUpStart } from '../../store/user/user.action';
 
